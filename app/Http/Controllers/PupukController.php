@@ -19,7 +19,35 @@ class PupukController extends Controller
             ->get();
 
         // 3. Format data agar sesuai DENGAN PERSIS struktur 'data' di AlpineJS
-        $formattedData = $publikasis->map(function ($item) {
+        $formattedData = $this->formatPublikasiData($publikasis);
+
+        // 4. Jenis Pupuk unik untuk filter dropdown
+        $jenisPupuk = \App\Models\Pupuk::select('nama')->distinct()->pluck('nama');
+
+        return view('users.datapupuk', [
+            'listKecamatan' => $kecamatan,
+            'dataPupuk' => $formattedData,
+            'listJenisPupuk' => $jenisPupuk,
+        ]);
+    }
+
+    public function getJsonData()
+    {
+        $publikasis = \App\Models\Publikasi::with(['desa.kecamatan', 'pupuk'])
+            ->where('is_publish', true)
+            ->get();
+
+        $formattedData = $this->formatPublikasiData($publikasis);
+
+        return response()->json([
+            'data' => $formattedData,
+            'last_update' => now()->locale('id')->diffForHumans(),
+        ]);
+    }
+
+    private function formatPublikasiData($publikasis)
+    {
+        return $publikasis->map(function ($item) {
             // LOGIC STATUS KHUSUS
             // Logic ini bisa disesuaikan dengan aturan bisnis user.
             $status = 'Aman';
@@ -41,14 +69,5 @@ class PupukController extends Controller
                 'desa' => $item->desa->nama,
             ];
         });
-
-        // 4. Jenis Pupuk unik untuk filter dropdown
-        $jenisPupuk = \App\Models\Pupuk::select('nama')->distinct()->pluck('nama');
-
-        return view('users.datapupuk', [
-            'listKecamatan' => $kecamatan,
-            'dataPupuk' => $formattedData,
-            'listJenisPupuk' => $jenisPupuk,
-        ]);
     }
 }

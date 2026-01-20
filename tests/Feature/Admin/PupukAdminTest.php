@@ -13,7 +13,8 @@ class PupukAdminTest extends TestCase
 
     public function test_admin_can_create_pupuk_with_jumlah_sak()
     {
-        $response = $this->post(route('admin.pupuk.store'), [
+        $user = User::factory()->create(['role' => 'admin']);
+        $response = $this->actingAs($user)->post(route('admin.pupuk.store'), [
             'nama' => 'Pupuk Test',
             'kategori' => 'Subsidi',
             'kg_per_sak' => 50,
@@ -38,7 +39,9 @@ class PupukAdminTest extends TestCase
             'jumlah_sak' => 10,
         ]);
 
-        $response = $this->put(route('admin.pupuk.update', $pupuk), [
+        $user = User::factory()->create(['role' => 'admin']);
+
+        $response = $this->actingAs($user)->put(route('admin.pupuk.update', $pupuk), [
             'nama' => 'Pupuk Update',
             'kategori' => 'Subsidi',
             'kg_per_sak' => 25,

@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\KomoditasAdminController;
 use App\Http\Controllers\Admin\PublikasiAdminController;
 use App\Http\Controllers\Admin\EduTipsPemupukanController;
 use App\Http\Controllers\Admin\EduTipsIrigasiController;
+use App\Http\Controllers\Admin\DashboardAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,7 @@ Route::post('/pengaduan', [HomeController::class, 'kirimPengaduan'])
 
 Route::get('/profile', fn () => view('users.profile'));
 Route::get('/datapupuk', [PupukController::class, 'index'])->name('pupuk.index');
+Route::get('/datapupuk/api', [PupukController::class, 'getJsonData'])->name('pupuk.api');
 
 Route::controller(EdukasiController::class)->prefix('users/edukasi_budidaya')->group(function () {
     Route::get('/tips_bibit', 'tipsBibit')->name('edukasi.bibit');
@@ -56,7 +58,6 @@ Route::middleware('guest')->group(function () {
 
 Route::post('/logout', [LoginAdminController::class, 'destroy'])->name('admin.logout');
 
-
 /*
 |--------------------------------------------------------------------------
 | DASHBOARD ADMIN (PROTECTED)
@@ -65,8 +66,8 @@ Route::post('/logout', [LoginAdminController::class, 'destroy'])->name('admin.lo
 
 Route::middleware(['admin'])->group(function () {
 
-    Route::get('/dashboard', fn () => view('dashboard.dashboard'))->name('admin.dashboard');
-    
+    Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('admin.dashboard');
+
     // EDUKASI BUDIDAYA
     Route::prefix('dashboard/edukasi_budidaya')->name('admin.edukasi.')->group(function () {
         Route::resource('tips_bibit', EduTipsBibitController::class);

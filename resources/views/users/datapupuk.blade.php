@@ -13,7 +13,7 @@
             <div
                 class="flex items-center gap-2 text-sm text-slate-500 bg-white px-4 py-2 rounded-full shadow-sm border border-slate-200">
                 <img src="{{ asset('img/data_pupuk/jam.webp') }}" class="h-4 w-4" alt="Update Icon">
-                <span>Update: <span x-text="lastUpdate" class="font-semibold text-slate-700"></span></span>
+              
             </div>
         </div>
 
@@ -276,12 +276,12 @@
                 class="bg-white border border-slate-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300 flex items-center justify-between group">
                 <div>
                     <p class="text-sm font-medium text-slate-500 mb-1">Varian Tersedia</p>
-                    <p class="text-3xl font-extrabold text-slate-800 group-hover:text-blue-600 transition-colors"
+                    <p class="text-3xl font-extrabold text-slate-800 group-hover:text-emerald-600 transition-colors"
                         x-text="jenisAktif.length"></p>
                     <span class="text-xs font-semibold text-slate-400">Jenis Pupuk</span>
                 </div>
                 <div
-                    class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                    class="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
                     <img src="{{ asset('img/data_pupuk/krisis.webp') }}" class="h-6 w-6" alt="Varian Tersedia">
                 </div>
             </div>
@@ -396,9 +396,9 @@
         {{-- ===================================================== --}}
         {{-- SECTION 5 : INFO VALIDASI DATA --}}
         {{-- ===================================================== --}}
-        <div class="bg-blue-50 border border-blue-100 rounded-xl p-4 flex items-start gap-3">
+        <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-4 flex items-start gap-3">
             <img src="{{ asset('img/data_pupuk/notif.webp') }}" class="h-5 w-5 mt-0.5 flex-shrink-0" alt="Info">
-            <p class="text-sm text-blue-800 leading-relaxed">
+            <p class="text-sm text-emerald-800 leading-relaxed">
                 <strong>Catatan Penting:</strong> Data stok diperbarui secara berkala oleh admin desa/kecamatan.
                 Jika status pembaruan lebih dari <strong>7 hari</strong>, mohon verifikasi langsung ke kios atau gudang
                 terkait sebelum melakukan pengambilan.

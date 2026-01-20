@@ -4,10 +4,11 @@
     {{-- Progress Bar Reading Indicator --}}
     <div class="fixed top-0 left-0 h-1 bg-green-600 z-50" id="progress-bar" style="width: 0%"></div>
 
-    <div class="min-h-screen bg-white font-sans text-gray-900">
+    <div class="min-h-screen font-sans text-gray-900">
+    <div class="min-h-screen  font-sans text-gray-900">
 
         {{-- Breadcrumb --}}
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4">
             <nav class="flex text-sm text-gray-500 space-x-2">
                 <a href="{{ url('/') }}" class="hover:text-green-600 transition-colors">Beranda</a>
                 <span>/</span>
@@ -17,10 +18,10 @@
             </nav>
         </div>
 
-        <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+        <article class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
 
             {{-- Header --}}
-            <header class="mb-10 text-center max-w-3xl mx-auto">
+            <header class="mb-10 text-center max-w-5xl mx-auto">
                 <div class="mb-4">
                     <span
                         class="inline-block py-1 px-3 rounded-full bg-green-100 text-green-700 text-xs font-bold tracking-wider uppercase">
@@ -61,22 +62,22 @@
                 </div>
             </header>
 
-            {{-- Featured Image --}}
-            <figure class="mb-12 relative rounded-2xl overflow-hidden shadow-xl aspect-video">
-                @if (Str::startsWith($berita->foto, 'http'))
-                    <img src="{{ $berita->foto }}" alt="{{ $berita->judul }}"
-                        class="w-full h-full object-cover">
-                @else
-                    <img src="{{ asset('storage/' . $berita->foto) }}" alt="{{ $berita->judul }}"
-                        class="w-full h-full object-cover">
-                @endif
-            </figure>
 
             {{-- Content --}}
-            <div class="flex flex-col lg:flex-row gap-12">
-
+            <div class="w-full">
                 {{-- Main Text --}}
-                <div class="lg:w-3/4 mx-auto">
+                <div class="max-w-5xl mx-auto bg-white p-8 md:p-12 rounded-3xl shadow-sm">
+                    {{-- Featured Image --}}
+                    <figure class="mb-8 relative rounded-2xl overflow-hidden aspect-video">
+                        @if (Str::startsWith($berita->foto, 'http'))
+                            <img src="{{ $berita->foto }}" alt="{{ $berita->judul }}"
+                                class="w-full h-full object-cover">
+                        @else
+                            <img src="{{ asset('storage/' . $berita->foto) }}" alt="{{ $berita->judul }}"
+                                class="w-full h-full object-cover">
+                        @endif
+                    </figure>
+
                     <div
                         class="prose prose-lg prose-green max-w-none text-gray-700 leading-relaxed first-letter:text-5xl first-letter:font-bold first-letter:text-green-600 first-letter:mr-3 first-letter:float-left">
                         {!! $berita->konten !!}
@@ -113,24 +114,21 @@
                         </div>
                     </div>
                 </div>
-
-                {{-- Sidebar --}}
-                <div class="lg:w-1/4 space-y-8">
-                    <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 sticky top-24">
-                        <h4 class="font-bold text-gray-900 mb-4">Navigasi</h4>
-                        <a href="{{ route('berita.index') }}"
-                            class="block w-full text-center py-3 px-4 bg-white border border-gray-200 rounded-xl text-gray-700 font-medium hover:border-green-500 hover:text-green-600 transition-all mb-3">
-                            &larr; Semua Berita
-                        </a>
-                        <a href="{{ url('/') }}"
-                            class="block w-full text-center py-3 px-4 bg-green-600 text-white rounded-xl font-bold hover:bg-green-700 transition-all shadow-lg shadow-green-600/20">
-                            Kembali ke Beranda
-                        </a>
-                    </div>
-                </div>
-
             </div>
 
+            {{-- Navigation Section --}}
+            <div class="mt-12 max-w-5xl mx-auto">
+                <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <a href="{{ route('berita.index') }}"
+                        class="px-6 py-3 bg-white border border-gray-200 rounded-xl text-gray-700 font-medium hover:border-green-500 hover:text-green-600 transition-all shadow-sm">
+                        &larr; Semua Berita
+                    </a>
+                    <a href="{{ url('/') }}"
+                        class="px-6 py-3 bg-green-600 text-white rounded-xl font-bold hover:bg-green-700 transition-all shadow-lg shadow-green-600/20">
+                        Kembali ke Beranda
+                    </a>
+                </div>
+            </div>
         </article>
     </div>
 
