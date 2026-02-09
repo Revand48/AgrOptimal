@@ -160,5 +160,4 @@ Route::middleware(['admin'])->group(function () {
 Route::controller(SimulasiController::class)->group(function () {
     Route::get('/simulasi', 'index')->name('simulasi.index');
     Route::post('/simulasi/calculate', 'calculate')->name('simulasi.calculate');
-    Route::post('/simulasi/analyze', 'analyze')->name('simulasi.analyze');
 });

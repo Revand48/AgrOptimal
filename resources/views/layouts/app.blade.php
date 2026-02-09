@@ -40,7 +40,9 @@
     </main>
 
     <!-- FOOTER -->
-    @include('components.footer')
+    <div class="relative z-130">
+        @include('components.footer')
+    </div>
 </body>
 
 </html>

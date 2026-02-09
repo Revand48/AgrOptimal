@@ -34,7 +34,13 @@ class CekTanahAdminController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'content' => 'required',
+            'description' => 'required|string',
+            'content_padi' => 'nullable|string',
+            'content_jagung' => 'nullable|string',
+            'content_kedelai' => 'nullable|string',
+            'content_singkong' => 'nullable|string',
+            'content_ubi' => 'nullable|string',
+            // 'content' => 'required', // Removed generic content validation, using specific ones now or description
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'step_number' => 'required|integer',
         ]);
@@ -77,7 +83,13 @@ class CekTanahAdminController extends Controller
 
         $request->validate([
             'title' => 'required|string|max:255',
-            'content' => 'required',
+            'description' => 'required|string',
+            'content_padi' => 'nullable|string',
+            'content_jagung' => 'nullable|string',
+            'content_kedelai' => 'nullable|string',
+            'content_singkong' => 'nullable|string',
+            'content_ubi' => 'nullable|string',
+            // 'content' => 'required',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'step_number' => 'required|integer',
         ]);

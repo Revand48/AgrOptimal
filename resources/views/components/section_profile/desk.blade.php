@@ -51,15 +51,6 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="flex flex-wrap gap-3">
-                    <a href="#" class="px-6 py-3 bg-[#2e7d32] hover:bg-[#1b5e20] text-white font-bold rounded-xl transition-all transform hover:-translate-y-1 shadow-md shadow-[#2e7d32]/20 text-sm lg:text-base">
-                        Mulai Sekarang
-                    </a>
-                    <a href="#" class="px-6 py-3 bg-white border-2 border-[#2e7d32]/20 hover:border-[#f4b400] text-[#2e7d32] font-bold rounded-xl transition-all text-sm lg:text-base">
-                        Pelajari Panduan
-                    </a>
-                </div>
             </div>
 
             <div class="w-full lg:w-5/12 relative mt-8 lg:mt-0"

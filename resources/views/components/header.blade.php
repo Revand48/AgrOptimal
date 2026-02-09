@@ -100,7 +100,7 @@
                     <li>
                         <a href="{{ url('/simulasi') }}"
                             class="relative group py-2 text-white font-bold transition-colors duration-300 hover:text-amber-300 {{ request()->is('simulasi') ? 'text-amber-300' : '' }}">
-                            Simulasi Panen & Lahan
+                            Simulasi Panen
                             <span
                                 class="absolute left-0 bottom-0 w-0 h-0.5 bg-amber-300 transition-all duration-300 group-hover:w-full {{ request()->is('simulasi') ? 'w-full' : '' }}"></span>
                         </a>

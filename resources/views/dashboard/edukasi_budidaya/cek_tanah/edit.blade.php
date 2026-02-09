@@ -46,53 +46,94 @@
                 @csrf
                 @method('PUT')
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-xs font-semibold text-green-700 uppercase tracking-wider mb-2">
-                            Nomor Urutan <span class="text-red-500">*</span>
-                        </label>
-                        <input type="number" name="step_number" required
-                            value="{{ old('step_number', $cekTanah->step_number) }}"
-                            class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500/20 focus:border-green-500 focus:bg-white outline-none transition-all duration-300">
+                <div class="mb-4">
+                    <label for="step_number" class="block text-sm font-medium text-gray-700">Nomor Langkah</label>
+                    <input type="number" name="step_number" id="step_number"
+                        value="{{ old('step_number', $cekTanah->step_number) }}"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500 sm:text-sm"
+                        required>
+                </div>
+
+                <div class="mb-4">
+                    <label for="title" class="block text-sm font-medium text-gray-700">Judul</label>
+                    <input type="text" name="title" id="title" value="{{ old('title', $cekTanah->title) }}"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500 sm:text-sm"
+                        required>
+                </div>
+
+                <div class="mb-4">
+                    <label for="description" class="block text-sm font-medium text-gray-700">Deskripsi Singkat</label>
+                    <textarea name="description" id="description" rows="3"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500 sm:text-sm"
+                        required>{{ old('description', $cekTanah->description) }}</textarea>
+                </div>
+
+                <div class="mb-4">
+                    <label for="image" class="block text-sm font-medium text-gray-700">Gambar</label>
+                    @if ($cekTanah->image)
+                        <div class="mb-2">
+                            <img src="{{ asset('storage/' . $cekTanah->image) }}" alt="Current Image"
+                                class="h-32 w-auto object-cover rounded">
+                        </div>
+                    @endif
+                    <input type="file" name="image" id="image"
+                        class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100">
+                </div>
+
+                {{-- Crop Specific Content Tabs --}}
+                <div x-data="{ activeTab: 'padi' }" class="mb-6">
+                    <div class="border-b border-gray-200">
+                        <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+                            <template x-for="crop in ['padi', 'jagung', 'kedelai', 'singkong', 'ubi']">
+                                <button type="button" @click="activeTab = crop"
+                                    :class="activeTab === crop ?
+                                        'border-emerald-500 text-emerald-600' :
+                                        'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'"
+                                    class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm capitalize"
+                                    x-text="crop">
+                                </button>
+                            </template>
+                        </nav>
+                    </div>
+
+                    <div class="mt-4">
+                        <div x-show="activeTab === 'padi'">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Konten Padi</label>
+                            <input id="content_padi" type="hidden" name="content_padi"
+                                value="{{ old('content_padi', $cekTanah->content_padi) }}">
+                            <trix-editor input="content_padi"></trix-editor>
+                        </div>
+                        <div x-show="activeTab === 'jagung'">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Konten Jagung</label>
+                            <input id="content_jagung" type="hidden" name="content_jagung"
+                                value="{{ old('content_jagung', $cekTanah->content_jagung) }}">
+                            <trix-editor input="content_jagung"></trix-editor>
+                        </div>
+                        <div x-show="activeTab === 'kedelai'">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Konten Kedelai</label>
+                            <input id="content_kedelai" type="hidden" name="content_kedelai"
+                                value="{{ old('content_kedelai', $cekTanah->content_kedelai) }}">
+                            <trix-editor input="content_kedelai"></trix-editor>
+                        </div>
+                        <div x-show="activeTab === 'singkong'">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Konten Singkong</label>
+                            <input id="content_singkong" type="hidden" name="content_singkong"
+                                value="{{ old('content_singkong', $cekTanah->content_singkong) }}">
+                            <trix-editor input="content_singkong"></trix-editor>
+                        </div>
+                        <div x-show="activeTab === 'ubi'">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Konten Ubi Jalar</label>
+                            <input id="content_ubi" type="hidden" name="content_ubi"
+                                value="{{ old('content_ubi', $cekTanah->content_ubi) }}">
+                            <trix-editor input="content_ubi"></trix-editor>
+                        </div>
                     </div>
                 </div>
 
-                <div>
-                    <label class="block text-xs font-semibold text-green-700 uppercase tracking-wider mb-2">
-                        Judul Langkah <span class="text-red-500">*</span>
-                    </label>
-                    <input type="text" name="title" required value="{{ old('title', $cekTanah->title) }}"
-                        class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500/20 focus:border-green-500 focus:bg-white outline-none transition-all duration-300"
-                        placeholder="Contoh: Amati Warna Tanah">
-                </div>
-
-                <div>
-                    <label class="block text-xs font-semibold text-green-700 uppercase tracking-wider mb-2">
-                        Konten Penjelasan <span class="text-red-500">*</span>
-                    </label>
-                    <textarea name="content" rows="5" required
-                        class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500/20 focus:border-green-500 focus:bg-white outline-none transition-all duration-300"
-                        placeholder="Jelaskan langkah cek tanah secara detail...">{{ old('content', $cekTanah->content) }}</textarea>
-                </div>
-
-                <div>
-                    <label class="block text-xs font-semibold text-green-700 uppercase tracking-wider mb-2">
-                        Gambar Ilustrasi (Opsional)
-                    </label>
-
-                    @if ($cekTanah->image)
-                        <div class="mb-3">
-                            <img src="{{ asset('storage/' . $cekTanah->image) }}" alt="Current image"
-                                class="w-32 h-32 object-cover rounded-xl border-2 border-gray-200">
-                            <p class="text-xs text-gray-500 mt-1">Gambar saat ini</p>
-                        </div>
-                    @endif
-
-                    <input type="file" name="image" accept="image/*"
-                        class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-bold file:bg-green-100 file:text-green-700 hover:file:bg-green-200 transition-all">
-                    <p class="text-xs text-gray-500 mt-2">Format: JPG, PNG, GIF. Maksimal 2MB. Kosongkan jika tidak ingin
-                        mengubah gambar.</p>
-                </div>
+                <!-- Fallback content field for backward compatibility -->
+                <input type="hidden" name="content" value="{{ old('content', $cekTanah->content ?? '-') }}">
+                <p class="text-xs text-gray-500 mt-2">Format: JPG, PNG, GIF. Maksimal 2MB. Kosongkan jika tidak ingin
+                    mengubah gambar.</p>
 
                 <div class="flex justify-end gap-3 pt-4 border-t border-gray-100">
                     <a href="{{ route('admin.edukasi.cek_tanah.index') }}"

@@ -157,7 +157,7 @@
                                 <th class="p-4 text-left text-xs font-semibold text-green-700 uppercase tracking-wider">
                                     Judul</th>
                                 <th class="p-4 text-left text-xs font-semibold text-green-700 uppercase tracking-wider">
-                                    Konten</th>
+                                    Deskripsi</th>
                                 <th
                                     class="p-4 text-center text-xs font-semibold text-green-700 uppercase tracking-wider w-32">
                                     Aksi</th>
@@ -187,7 +187,7 @@
                                             <span class="font-medium text-gray-800">{{ $item->title }}</span>
                                         </div>
                                     </td>
-                                    <td class="p-4 text-gray-600 max-w-xs truncate">{{ $item->content }}</td>
+                                    <td class="p-4 text-gray-600 max-w-xs truncate">{{ $item->description }}</td>
                                     <td class="p-4 text-center">
                                         <div class="flex items-center justify-center gap-2">
                                             <a href="{{ route('admin.edukasi.cek_tanah.edit', $item->id) }}"

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="min-h-screen bg-gradient-to-b relative overflow-hidden font-sans text-slate-800">
+    <div class="min-h-screen bg-gradient-to-b overflow-hidden font-sans text-gray-800" x-data="{ activeCrop: 'padi' }">
 
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-20">
 
@@ -25,25 +25,30 @@
                     Ikuti panduan langkah demi langkah pengecekan tanah secara tradisional untuk memastikan lahan Anda dalam
                     kondisi optimal. Tanah sehat adalah kunci panen melimpah.
                 </p>
+
+                {{-- Toggle Komoditas --}}
+                <div class="flex flex-wrap justify-center gap-3 mt-8">
+                    <template
+                        x-for="crop in [
+                        {key:'padi', label:'🌾 Padi'},
+                        {key:'jagung', label:'🌽 Jagung'},
+                        {key:'kedelai', label:'🫘 Kedelai'},
+                        {key:'singkong', label:'🌿 Singkong'},
+                        {key:'ubi', label:'🍠 Ubi Jalar'}
+                    ]">
+                        <button @click="activeCrop = crop.key"
+                            class="px-5 py-2.5 rounded-full text-sm font-bold transition-all duration-300 shadow-sm hover:shadow-md border"
+                            :class="activeCrop === crop.key ?
+                                'bg-emerald-600 text-white border-emerald-600 scale-105 ring-2 ring-emerald-200' :
+                                'bg-white text-gray-600 border-gray-200 hover:border-emerald-300 hover:text-emerald-700'">
+                            <span x-text="crop.label"></span>
+                        </button>
+                    </template>
+                </div>
             </div>
-
-
 
             {{-- SECTION 2: CEK TANAH TRADISIONAL --}}
             <section id="tradisional" class="scroll-mt-24">
-                <div class="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-4 text-center md:text-left">
-                    <div>
-                        <div class="flex items-center gap-3 mb-2">
-                            <div
-                                class="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center shadow-lg shadow-emerald-600/20">
-                                <span class="text-white font-black text-sm">01</span>
-                            </div>
-                            <h2 class="text-3xl font-bold text-slate-800">Cek Tanah Tradisional</h2>
-                        </div>
-                        <p class="text-slate-500 md:ml-13 text-lg">Panduan langkah demi langkah mengecek tanah secara
-                            manual.</p>
-                    </div>
-                </div>
 
                 @php
                     // $steps is passed from the EdukasiController
@@ -90,9 +95,31 @@
                                                         {{ $step->title }}
                                                     </h3>
                                                 </div>
-                                                <p class="text-slate-600 leading-relaxed text-sm">
-                                                    {{ $step->content }}
+                                                <p class="text-slate-600 leading-relaxed text-sm font-medium">
+                                                    {{ $step->description }}
                                                 </p>
+
+                                                <!-- Dynamic Content -->
+                                                <div class="mt-4 pt-4 border-t border-dashed border-emerald-100 text-gray-600 text-sm leading-relaxed"
+                                                    x-transition:enter="transition ease-out duration-300"
+                                                    x-transition:enter-start="opacity-0 translate-y-2"
+                                                    x-transition:enter-end="opacity-100 translate-y-0">
+                                                    <template x-if="activeCrop === 'padi'">
+                                                        <div class="prose-sm prose-emerald">{!! $step->content_padi !!}</div>
+                                                    </template>
+                                                    <template x-if="activeCrop === 'jagung'">
+                                                        <div class="prose-sm prose-emerald">{!! $step->content_jagung !!}</div>
+                                                    </template>
+                                                    <template x-if="activeCrop === 'kedelai'">
+                                                        <div class="prose-sm prose-emerald">{!! $step->content_kedelai !!}</div>
+                                                    </template>
+                                                    <template x-if="activeCrop === 'singkong'">
+                                                        <div class="prose-sm prose-emerald">{!! $step->content_singkong !!}</div>
+                                                    </template>
+                                                    <template x-if="activeCrop === 'ubi'">
+                                                        <div class="prose-sm prose-emerald">{!! $step->content_ubi !!}</div>
+                                                    </template>
+                                                </div>
                                             </div>
 
                                             <!-- Arrow Desktop -->
@@ -144,9 +171,31 @@
                                                         {{ $step->title }}
                                                     </h3>
                                                 </div>
-                                                <p class="text-slate-600 leading-relaxed text-sm">
-                                                    {{ $step->content }}
+                                                <p class="text-slate-600 leading-relaxed text-sm font-medium">
+                                                    {{ $step->description }}
                                                 </p>
+
+                                                <!-- Dynamic Content -->
+                                                <div class="mt-4 pt-4 border-t border-dashed border-emerald-100 text-gray-600 text-sm leading-relaxed"
+                                                    x-transition:enter="transition ease-out duration-300"
+                                                    x-transition:enter-start="opacity-0 translate-y-2"
+                                                    x-transition:enter-end="opacity-100 translate-y-0">
+                                                    <template x-if="activeCrop === 'padi'">
+                                                        <div class="prose-sm prose-emerald">{!! $step->content_padi !!}</div>
+                                                    </template>
+                                                    <template x-if="activeCrop === 'jagung'">
+                                                        <div class="prose-sm prose-emerald">{!! $step->content_jagung !!}</div>
+                                                    </template>
+                                                    <template x-if="activeCrop === 'kedelai'">
+                                                        <div class="prose-sm prose-emerald">{!! $step->content_kedelai !!}</div>
+                                                    </template>
+                                                    <template x-if="activeCrop === 'singkong'">
+                                                        <div class="prose-sm prose-emerald">{!! $step->content_singkong !!}</div>
+                                                    </template>
+                                                    <template x-if="activeCrop === 'ubi'">
+                                                        <div class="prose-sm prose-emerald">{!! $step->content_ubi !!}</div>
+                                                    </template>
+                                                </div>
                                             </div>
 
                                             <!-- Arrow Desktop -->

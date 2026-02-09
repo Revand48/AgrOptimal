@@ -12,7 +12,13 @@ class CekTanah extends Model
     protected $fillable = [
         'title',
         'slug',
-        'content',
+        'description',
+        'content', // Keep for backward compatibility if needed, or remove if fully replaced. Plan says add new ones.
+        'content_padi',
+        'content_jagung',
+        'content_kedelai',
+        'content_singkong',
+        'content_ubi',
         'image',
         'step_number',
     ];

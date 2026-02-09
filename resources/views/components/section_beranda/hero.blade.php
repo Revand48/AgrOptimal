@@ -133,14 +133,6 @@
                     dan laporan lapangan dalam satu website.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start">
-                    <button
-                        class="px-8 py-3.5 bg-[#2e7d32] text-white rounded-xl font-bold shadow-lg shadow-green-900/10 hover:bg-[#256629] hover:-translate-y-1 transition-all duration-300">
-                        Lihat Data Pupuk
-                    </button>
-                    <button
-                        class="px-8 py-3.5 bg-[#FFF9E6] text-[#2e7d32] border border-[#f4b400]/30 rounded-xl font-bold hover:bg-[#fff5d6] hover:-translate-y-1 transition-all duration-300">
-                        Pelajari Budidaya
-                    </button>
                 </div>
                 <div class="pt-2">
                     <p class="text-sm font-medium text-gray-500">
