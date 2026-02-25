@@ -70,6 +70,33 @@
                 class="absolute right-4 w-2 h-2 bg-green-500 rounded-full"></div>
         </a>
 
+        <!-- Menu Live Chat -->
+        <a href="{{ route('admin.livechat.index') }}"
+            :class="currentUrl === '{{ route('admin.livechat.index') }}' || currentUrl.includes('/dashboard/livechat') ?
+                'bg-gradient-to-r from-green-50 to-white text-green-800 shadow-sm border-green-100' :
+                'text-gray-600 hover:bg-gradient-to-r hover:from-green-50 hover:to-white hover:text-green-800 hover:translate-x-1 hover:shadow-md hover:shadow-green-100/50 border-transparent'"
+            class="group relative flex items-center gap-3.5 px-4 py-3.5 rounded-2xl border transition-all duration-300 ease-out overflow-hidden">
+
+            <div :class="currentUrl === '{{ route('admin.livechat.index') }}' || currentUrl.includes('/dashboard/livechat') ?
+                'w-1.5 bg-yellow-500' :
+                'w-0 bg-yellow-400 group-hover:w-1.5'"
+                class="absolute left-0 top-1/2 -translate-y-1/2 h-3/5 rounded-r-full transition-all duration-300 ease-out">
+            </div>
+
+            <svg :class="currentUrl === '{{ route('admin.livechat.index') }}' || currentUrl.includes('/dashboard/livechat') ?
+                'text-green-600 scale-110' :
+                'text-gray-400 group-hover:text-yellow-600 group-hover:scale-110 group-hover:rotate-[6deg]'"
+                class="w-6 h-6 transition-all duration-300 ease-out" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z">
+                </path>
+            </svg>
+            <span class="font-semibold tracking-tight relative z-10">Live Chat</span>
+            <div x-show="currentUrl === '{{ route('admin.livechat.index') }}' || currentUrl.includes('/dashboard/livechat')"
+                class="absolute right-4 w-2 h-2 bg-green-500 rounded-full"></div>
+        </a>
+
         <!-- Dropdown Beranda -->
         <div class="relative space-y-1" x-data="{ open: {{ request()->is('dashboard/home-statistik*', 'dashboard/home-faq*') ? 'true' : 'false' }} }">
             <button @click="open = !open"

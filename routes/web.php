@@ -6,6 +6,7 @@ use App\Http\Controllers\PupukController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\EdukasiController;
 use App\Http\Controllers\SimulasiController;
+use App\Http\Controllers\LiveChatController;
 
 use App\Http\Controllers\Admin\HomeAdminController;
 use App\Http\Controllers\Admin\PupukAdminController;
@@ -20,6 +21,7 @@ use App\Http\Controllers\Admin\PublikasiAdminController;
 use App\Http\Controllers\Admin\EduTipsPemupukanController;
 use App\Http\Controllers\Admin\EduTipsIrigasiController;
 use App\Http\Controllers\Admin\DashboardAdminController;
+use App\Http\Controllers\Admin\LiveChatAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +45,15 @@ Route::controller(EdukasiController::class)->prefix('users/edukasi_budidaya')->g
 });
 Route::get('/berita', [BeritaController::class, 'index'])->name('berita.index');
 Route::get('/berita/{berita:slug}', [BeritaController::class, 'show'])->name('berita.show');
+
+// LIVE CHAT API (Public, tanpa auth)
+Route::prefix('api/livechat')->group(function () {
+    Route::get('/status', [LiveChatController::class, 'status'])->name('livechat.status');
+    Route::post('/start', [LiveChatController::class, 'start'])->name('livechat.start');
+    Route::post('/send', [LiveChatController::class, 'send'])->name('livechat.send');
+    Route::get('/poll/{sessionId}', [LiveChatController::class, 'poll'])->name('livechat.poll');
+    Route::post('/end', [LiveChatController::class, 'endChat'])->name('livechat.end');
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -154,6 +165,18 @@ Route::middleware(['admin'])->group(function () {
         Route::get('/', [SimulasiAdminController::class, 'index'])->name('index');
         Route::post('/', [SimulasiAdminController::class, 'store'])->name('store');
         Route::delete('/{simulasi}', [SimulasiAdminController::class, 'destroy'])->name('destroy');
+    });
+
+    // LIVE CHAT ADMIN
+    Route::prefix('dashboard/livechat')->name('admin.livechat.')->group(function () {
+        Route::get('/', [LiveChatAdminController::class, 'index'])->name('index');
+        Route::get('/poll', [LiveChatAdminController::class, 'pollAdmin'])->name('poll');
+        Route::post('/toggle-online', [LiveChatAdminController::class, 'toggleOnline'])->name('toggle');
+        Route::get('/{liveChat}', [LiveChatAdminController::class, 'show'])->name('show');
+        Route::get('/{liveChat}/messages', [LiveChatAdminController::class, 'pollMessages'])->name('messages');
+        Route::post('/{liveChat}/reply', [LiveChatAdminController::class, 'reply'])->name('reply');
+        Route::post('/{liveChat}/end', [LiveChatAdminController::class, 'endChat'])->name('end');
+        Route::delete('/{liveChat}', [LiveChatAdminController::class, 'destroy'])->name('destroy');
     });
 });
 

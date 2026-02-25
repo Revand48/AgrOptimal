@@ -5,6 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $title ?? config('app.name') }}</title>
     <link rel="icon" href="{{ asset('img/core/logogo.webp') }}">
     @vite('resources/css/app.css')
@@ -43,6 +44,9 @@
     <div class="relative z-130">
         @include('components.footer')
     </div>
+
+    {{-- LIVE CHAT WIDGET --}}
+    @include('components.livechat')
 </body>
 
 </html>
